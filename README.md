@@ -1,28 +1,11 @@
-== README
+# Responsive Shots
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple application to send out screenshots of a website at different resolutions.
 
-Things you may want to cover:
+# Try it out
 
-* Ruby version
+http://responsiveshots.com
 
-* System dependencies
+# Why?
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+I wanted this so I could quickly test some sites I built on a regular basis.
