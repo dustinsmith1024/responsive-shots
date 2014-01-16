@@ -53,6 +53,7 @@ class MessagesController < ApplicationController
 
   # DELETE /messages/1
   # DELETE /messages/1.json
+  # TODO: Remove or move to admin?
   def destroy
     @message.destroy
     respond_to do |format|
@@ -69,7 +70,6 @@ class MessagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      puts params.inspect
-      params.require(:message).permit(:description, :error, :token, :email, :url, :delivered)
+      params.require(:message).permit(:description, :email, :url)
     end
 end

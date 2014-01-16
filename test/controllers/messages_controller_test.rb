@@ -40,6 +40,18 @@ class MessagesControllerTest < ActionController::TestCase
     assert_redirected_to message_path(assigns(:message))
   end
 
+  def test_wont_update_restricted_fields
+    put :update, id: @message, message: { 'delivered' => true, 'token' => '123', 'error' => true, 'url' => 'one' }
+    new_message = assigns(:message)
+
+    assert_equal('one', new_message.url)
+    assert_equal(@message.delivered, new_message.delivered)
+    assert_equal(@message.error, new_message.error)
+    assert_equal(@message.token, new_message.token)
+
+    assert_redirected_to message_path(assigns(:message))
+  end
+
   def test_destroy
     assert_difference('Message.count', -1) do
       delete :destroy, id: @message
