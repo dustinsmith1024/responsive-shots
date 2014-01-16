@@ -1,0 +1,188 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+
+/* Going for a 2 color scheme with dark bg and light
+text. A middle section of content with light bg and 
+dark text. Outside for foot should be opposite colors */
+
+$light: #C5BCB0;
+$light: #EEE;
+$not-so-light: #DDD;
+$dark: #4A525A;
+$blue: #3AA6D0;
+
+body {
+	background: #CCC;
+	margin: 0 auto;
+	color: $light;
+	font-size: 16px;
+	font-family: Century Gothic, sans-serif;
+	text-transform: uppercase;
+}
+.code {
+	overflow: scroll;
+	width: 100%;
+}
+
+.scroll {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+a {
+	color: $blue;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+p {
+	word-wrap: break-word;
+}
+
+footer {
+	position: relative;
+	z-index: 10;
+	width: 300px;
+	max-width: 100%;
+	margin: 20px auto;
+
+}
+
+footer, footer a {
+	color: #999;
+	margin-top: 5px;
+	a {
+		text-decoration: none;
+		font-weight: normal;
+	}
+	li {
+		display: inline;
+		padding-right: 1em;
+		float: right;
+		&:first-child {
+			float: left;
+			padding-right: 1em;
+		}
+	}
+	ul {
+		margin: 0;
+		padding: 0;
+	}
+}
+
+h1 {
+	font-size: 1.5em;
+	a {
+		color: #3AA6D0;
+		text-decoration: none;
+	}
+}
+
+h2 {
+	font-size: 1.25em;
+}
+
+input, textarea {
+	width: 100%;
+	margin-top: 2px;
+	background-color: #EEE;
+	border: 1px solid #4a525a;
+	border-radius: 2px;
+}
+
+input[type=submit] {
+	text-transform: uppercase;
+	font-size: 90%;
+	background-color: #CCC;
+	color: #333;
+	margin-top: 1.5em;
+}
+
+.field {
+	margin: 5px 0;
+	padding: 2px;
+}
+
+table, td {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+td {
+	text-align: center;
+}
+
+.background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	div {
+		height: 200%;
+		width: 200%;
+		position: absolute;
+		left: -50%;
+		top: -50%;
+		img {
+			margin: 0 auto;
+			min-width: 50%;
+			min-height: 50%;
+		}
+	}
+}
+
+.field_with_errors {
+	display: inline-block;
+}
+
+.content {
+	position: relative;
+	z-index: 70;
+	border: 3px solid #000;
+	background-color: rgba(10, 10, 10, 0.8);
+	box-shadow: 0px 3px 300px #000;
+	border-radius: 2px;
+	padding: 0 20px 20px;
+	width: 300px;
+	max-width: 100%;
+	margin: 20px auto 0 auto;
+	text-align: left;
+}
+
+@media only screen and (max-width: 320px){
+	.content {
+		border: none;
+		padding: 0 20px 20px;
+		width: inherit;
+		max-width: 100%;
+		margin: 5px auto 0 auto;
+	}
+	h1 {
+		margin-top: 0;
+	}
+}
+
+
+
+.notice {
+	font-size: 80%;
+}
+
+#notice {
+	font-weight: bold;
+}
