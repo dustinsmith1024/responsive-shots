@@ -8,4 +8,13 @@ class ScreenshotTest < ActiveSupport::TestCase
   		assert_respond_to screenshot, method
   	end
   end
+
+  # TODO: This should probably be moved to integration test or totaly extracted from the model.
+  def test_taking
+    message = Message.create({ url: 'http://smith1024.com', email: 'dds1024+spam@gmail.com' })
+    screenshot = message.screenshots.new({height: 800, width: 1020})
+    screenshot.take
+    refute message.error
+    screenshot.delete_file
+  end
 end
