@@ -1,4 +1,5 @@
 require 'capybara/poltergeist'
+
 class Screenshot < ActiveRecord::Base
   include Capybara::DSL
   belongs_to :message
@@ -11,16 +12,8 @@ class Screenshot < ActiveRecord::Base
 
   def take
     Capybara.app_host = url
-    options = {}
-    options[:js_errors]=false
-
-    Capybara.register_driver :poltergeist do |app|
-      Capybara::Poltergeist::Driver.new(app, options)
-    end
-
-    Capybara.default_driver = :poltergeist
-    
     self.file = file_name
+    
     begin
       visit(url)
       page.driver.resize_window(width, height)
@@ -28,6 +21,7 @@ class Screenshot < ActiveRecord::Base
       self.save
     rescue => e
       puts e
+      puts 'hiiiii!'
       message.error = true
       #ScreenshotMailer.screenshot_error_email(self).deliver
     end # End rescue block
@@ -38,13 +32,10 @@ class Screenshot < ActiveRecord::Base
     message.delivered = Time.now
     self.save!
     message.save!
-    #files.each do |file|
-    #  File.delete(file)
-    #end
   end
 
   def delete_file
-    File.delete(file)
+    File.delete(file) if file
   end
 
   def run
