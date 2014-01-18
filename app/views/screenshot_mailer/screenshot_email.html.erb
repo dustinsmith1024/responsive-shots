@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h2>Here's your screenshots for <%= @message.url %></h2>
+    <p><%= @message.description %></p>
+    <p><%= link_to 'Want to resend your screenshots?', message_url(@message.id,
+                          :token => @message.token, 
+                          :email => @message.email)
+                          %></p>
+  </body>
+</html>
