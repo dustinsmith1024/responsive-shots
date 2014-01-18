@@ -19,7 +19,7 @@ class MessagesControllerTest < ActionController::TestCase
 
   def test_create
     assert_difference('Message.count') do
-      post :create, message: { 'description' => 'sup' } # investigate: minitest doesnt like a blank message? 
+      post :create, message: { description: 'sup', url: 'http://email.com', email: 'h@gmail.com' } # investigate: minitest doesnt like a blank message? 
     end
 
     assert_redirected_to message_path(assigns(:message))
@@ -36,15 +36,15 @@ class MessagesControllerTest < ActionController::TestCase
   end
 
   def test_update
-    put :update, id: @message, message: { 'url' => 'http://test.com' }
+    put :update, id: @message, message: { url: 'http://one.com', email: 'h@gmail.com' }
     assert_redirected_to message_path(assigns(:message))
   end
 
   def test_wont_update_restricted_fields
-    put :update, id: @message, message: { 'delivered' => true, 'token' => '123', 'error' => true, 'url' => 'one' }
+    put :update, id: @message, message: { delivered: true, token: '123', error: true, url: 'http://one.com', email: 'h@gmail.com' }
     new_message = assigns(:message)
 
-    assert_equal('one', new_message.url)
+    assert_equal('http://one.com', new_message.url)
     assert_equal(@message.delivered, new_message.delivered)
     assert_equal(@message.error, new_message.error)
     assert_equal(@message.token, new_message.token)
