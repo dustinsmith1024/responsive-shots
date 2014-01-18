@@ -2,11 +2,11 @@ require "test_helper"
 
 class MessageTest < ActiveSupport::TestCase
   
-  def test_object
-  	message = Message.new({ url: 'http://gmail.com', email: 'example@gmail.com' })
-  	[:email, :url, :token, :description].each do |method|
-  		assert_respond_to message, method
-  	end
+  def test_object_methods
+    message = Message.new({ url: 'http://gmail.com', email: 'example@gmail.com' })
+    [:email, :url, :token, :description, :error, :delivered].each do |method|
+      assert_respond_to message, method
+    end
   end
 
   def test_valid
@@ -35,7 +35,7 @@ class MessageTest < ActiveSupport::TestCase
     refute_empty message.errors[:url], "Missing error when without url"
   end
 
-	def test_invalid_url
+  def test_invalid_url
     message = Message.new({url: 'htp:/no.com', email: 'h@gmail.com'})
 
     refute message.valid?, "Can't be valid without url"
