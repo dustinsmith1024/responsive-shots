@@ -12,7 +12,10 @@ gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
 
 gem 'minitest-rails'
+gem 'minitest-colorize'
+gem 'minitest-focus'
 gem "minitest-rails-capybara"
+
 gem 'capybara'
 gem 'poltergeist'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -26,11 +29,6 @@ gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
-
-group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
-end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
