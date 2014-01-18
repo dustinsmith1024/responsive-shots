@@ -25,5 +25,16 @@ module ResponsiveShots
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     I18n.enforce_available_locales = false
+    
+    # This won't launch the default Capybara rack server - Saves a ton of time!
+    Capybara.run_server = false
+    options = {}
+    options[:js_errors]=false
+
+    Capybara.register_driver :poltergeist do |app|
+      Capybara::Poltergeist::Driver.new(app, options)
+    end
+
+    Capybara.default_driver = :poltergeist
   end
 end
