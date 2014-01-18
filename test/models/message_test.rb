@@ -2,6 +2,13 @@ require "test_helper"
 
 class MessageTest < ActiveSupport::TestCase
   
+  def test_object
+  	message = Message.new({ url: 'http://gmail.com', email: 'example@gmail.com' })
+  	[:email, :url, :token, :description].each do |method|
+  		assert_respond_to message, method
+  	end
+  end
+
   def test_valid
     message = Message.new({ url: 'http://gmail.com', email: 'example@gmail.com' })
     assert message.valid?, "Can't create with valid params: #{message.errors.messages}"
