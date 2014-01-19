@@ -4,7 +4,7 @@ class MessageTest < ActiveSupport::TestCase
   
   def test_object_methods
     message = Message.new({ url: 'http://gmail.com', email: 'example@gmail.com' })
-    [:email, :url, :token, :description, :error, :delivered].each do |method|
+    [:email, :url, :token, :description, :error, :delivered, :prepare, :cleanup, :send].each do |method|
       assert_respond_to message, method
     end
   end
@@ -40,5 +40,29 @@ class MessageTest < ActiveSupport::TestCase
 
     refute message.valid?, "Can't be valid without url"
     refute_empty message.errors[:url], "Missing error when without url"
+  end
+
+  def test_prepare
+    message = Message.create({ url: 'http://smith1024.com', email: 'dds1024+spam@gmail.com' })
+    shot1 = message.screenshots.create({height: 800, width: 1020})
+    shot2 = message.screenshots.create({height: 300, width: 1220})
+
+    message.prepare
+    refute_nil shot1.file
+    refute_nil shot2.file
+    refute message.error
+
+    message.cleanup
+  end
+
+  def test_deliver
+    message = Message.create({ url: 'http://smith1024.com', email: 'dds1024+spam@gmail.com' })
+    shot1 = message.screenshots.create({height: 800, width: 1200})
+
+    message.deliver
+    refute_nil shot1.file
+    refute message.error
+    refute ActionMailer::Base.deliveries.empty?
+    refute File.exists?(shot1.file)
   end
 end

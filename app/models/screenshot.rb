@@ -18,20 +18,13 @@ class Screenshot < ActiveRecord::Base
       visit(url)
       page.driver.resize_window(width, height)
       page.driver.render(file, full: true)
-      self.save
     rescue => e
       puts e
-      puts 'hiiiii!'
       message.error = true
-      #ScreenshotMailer.screenshot_error_email(self).deliver
-    end # End rescue block
+    end
     
-    # TODO: Could possibly queue this too
-    #ScreenshotMailer.screenshot_email(self).deliver unless self.error
-    #self.histories.create(email: self.email)
-    message.delivered = Time.now
-    self.save!
-    message.save!
+    self.save
+    message.save
   end
 
   def delete_file
