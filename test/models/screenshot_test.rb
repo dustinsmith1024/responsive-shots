@@ -17,4 +17,20 @@ class ScreenshotTest < ActiveSupport::TestCase
     refute message.error
     screenshot.delete_file
   end
+
+  def test_deleting
+    message = Message.create({ url: 'http://smith1024.com', email: 'dds1024+spam@gmail.com' })
+    screenshot = message.screenshots.new({height: 800, width: 1020})
+    screenshot.take
+    assert File.exists?(screenshot.file)
+    screenshot.delete_file
+    refute File.exists?(screenshot.file)
+  end
+
+  def test_deleting_nil_file
+    message = Message.create({ url: 'http://smith1024.com', email: 'dds1024+spam@gmail.com' })
+    screenshot = message.screenshots.new({height: 800, width: 1020})
+
+    screenshot.delete_file
+  end
 end
