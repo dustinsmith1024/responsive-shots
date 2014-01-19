@@ -2,6 +2,7 @@ require "test_helper"
 
 class MessageDelivererTest < ActiveSupport::TestCase
   def test_perform
+    # TODO: Could probably just mock and test that .deliver is called on message
     message = Message.create({ url: 'http://smith1024.com', email: 'dds1024+spam@gmail.com' })
     shot1 = message.screenshots.create({height: 800, width: 1200})
 
