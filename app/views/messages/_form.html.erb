@@ -1,7 +1,7 @@
 <%= form_for(@message) do |f| %>
   <% if @message.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h2>
+      <p><%= pluralize(@message.errors.count, "error") %> prohibited this screenshot from being saved:</p>
 
       <ul>
       <% @message.errors.full_messages.each do |msg| %>
@@ -10,32 +10,33 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
+    <%= f.label :url %>: <br />
+    <%= f.text_field :url, placeholder: 'http://responsiveshots.com' %>
   </div>
   <div class="field">
-    <%= f.label :error %><br>
-    <%= f.check_box :error %>
+    <%= f.label :email %>: <br />
+    <%= f.text_field :email, placeholder: "you@gmail.com" %>
   </div>
   <div class="field">
-    <%= f.label :token %><br>
-    <%= f.text_field :token %>
+    <%= f.label :description, "Message Body" %>: <br />
+    <%= f.text_area :description, placeholder: "Here's some screenshots of this new site I'm working on.", class: "message-body" %>
   </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :url %><br>
-    <%= f.text_field :url %>
-  </div>
-  <div class="field">
-    <%= f.label :delivered %><br>
-    <%= f.check_box :delivered %>
+  <label>Screenshot Sizes <small>(height X width)</small></label>
+  <ul class="inline-icon-list">
+    <li><%= fa_icon 'desktop 3x', class: 'disabled' %><span>800x600</span></li>
+    <li><%= fa_icon 'laptop 3x', class: 'disabled' %></li>
+    <li><%= fa_icon 'tablet 3x', title: '800x600' %></li>
+    <li><%= fa_icon 'mobile 3x' %></li>
+  </ul>
+  <%= hidden_field_tag :phone, true %>
+  <div class="sizes">
+  <%= f.fields_for :screenshots do |builder| %> 
+        <%= builder.hidden_field :height %>
+        <%= builder.hidden_field :width %>
+  <% end %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit @button %>
   </div>
 <% end %>

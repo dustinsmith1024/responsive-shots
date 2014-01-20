@@ -15,6 +15,9 @@ class MessagesController < ApplicationController
   # GET /messages/new
   def new
     @message = Message.new
+    @message.screenshots.build(height: 900, width: 1200)
+    @message.screenshots.build(height: 600, width: 768)
+    @message.screenshots.build(height: 480, width: 320)
   end
 
   # GET /messages/1/edit
@@ -40,8 +43,9 @@ class MessagesController < ApplicationController
   # PATCH/PUT /messages/1
   # PATCH/PUT /messages/1.json
   def update
+    puts params[:phone]
     respond_to do |format|
-      if @message.update(message_params)
+      if @message.update_attributes(message_params)
         format.html { redirect_to @message, notice: 'Message was successfully updated.' }
         format.json { head :no_content }
       else
@@ -70,6 +74,6 @@ class MessagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params.require(:message).permit(:description, :email, :url)
+      params.require(:message).permit(:description, :email, :url, screenshots_attributes: [:id, :height, :width ])
     end
 end

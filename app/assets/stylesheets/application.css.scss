@@ -10,6 +10,7 @@
  *
  *= require_self
  *= require_tree .
+ *= require font-awesome
  */
 
 /* Going for a 2 color scheme with dark bg and light
@@ -185,4 +186,50 @@ td {
 
 #notice {
 	font-weight: bold;
+}
+
+.inline-icon-list {
+	padding: 20px 0;
+}
+
+.inline-icon-list li {
+	display: block;
+	float: left;
+	height: 60px;
+	text-align: center;
+	width: 25%;
+	position: relative;
+	span {
+		display: none;
+	}
+	&:hover span {
+		//position: absolute;
+		//left: 5px;
+		display: initial;
+	}
+}
+
+.disabled {
+	color: gray;
+}
+
+.inline-icon-list li {
+	span {
+		opacity: 0;
+	}
+  -webkit-transform: scale(1,1);
+  -webkit-transition-timing-function: ease-out;
+  -webkit-transition-duration: 250ms;
+  -moz-transform: scale(1,1);
+  -moz-transition-timing-function: ease-out;
+  -moz-transition-duration: 250ms;
+}
+
+.inline-icon-list li:hover {
+  -webkit-transform: scale(1.25);
+	-webkit-transition-timing-function: ease-out;
+	-webkit-transition-duration: 250ms;
+	-moz-transform: scale(1.05,1.07);
+	-moz-transition-timing-function: ease-out;
+	-moz-transition-duration: 250ms;
 }

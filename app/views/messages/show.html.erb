@@ -1,34 +1,34 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Description:</strong>
-  <%= @message.description %>
-</p>
-
-<p>
-  <strong>Error:</strong>
-  <%= @message.error %>
-</p>
-
-<p>
-  <strong>Token:</strong>
-  <%= @message.token %>
-</p>
-
-<p>
-  <strong>Email:</strong>
+  <b>Email:</b>
   <%= @message.email %>
 </p>
 
 <p>
-  <strong>Url:</strong>
-  <%= @message.url %>
-</p>
-
-<p>
-  <strong>Delivered:</strong>
+  <b>Delivered:</b>
   <%= @message.delivered %>
 </p>
 
-<%= link_to 'Edit', edit_message_path(@message) %> |
-<%= link_to 'Back', messages_path %>
+<p>
+  <b>Description:</b>
+  <%= @message.description %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%= @message.url %>
+</p>
+
+<p><b>Sizes:</b></p>
+<ul>
+<% @message.screenshots.each do |screenshot| %>
+  <% if screenshot.height %>
+  <li><%= screenshot.height %> x <%= screenshot.width %> <% if screenshot.file %><% end %></li>
+  <% end %>
+<% end %>
+</ul>
+
+<%#= link_to 'Resend', run_screenshot_path(@screenshot, token: @screenshot.token, email: @screenshot.email) %> &#8226; 
+<%= link_to 'Edit Details', edit_message_path(@message) %> &#8226; 
+<%#= link_to 'New', new_screenshot_path %>

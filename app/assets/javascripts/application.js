@@ -14,3 +14,8 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$(document).on('click', '.fa', function(e){
+  e.preventDefault();
+  $(this).toggleClass('disabled');
+})
