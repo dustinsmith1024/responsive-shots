@@ -1,0 +1,18 @@
+# Read about fixtures at
+# http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  slug: MyString
+  display: MyString
+  icon: MyString
+  primary: false
+  height: 1
+  width: 1
+
+two:
+  slug: MyString
+  display: MyString
+  icon: MyString
+  primary: false
+  height: 1
+  width: 1
