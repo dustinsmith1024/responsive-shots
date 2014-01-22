@@ -18,16 +18,12 @@
     <%= f.label :email %>: <br />
     <%= f.text_field :email, placeholder: "you@gmail.com" %>
   </div>
-  <div class="field">
-    <%= f.label :description, "Message Body" %>: <br />
-    <%= f.text_area :description, placeholder: "Here's some screenshots of this new site I'm working on.", class: "message-body" %>
-  </div>
-  <label>Screenshot Sizes <small>(height X width)</small></label>
+  <label>Screen Sizes:</label>
   <ul class="inline-icon-list">
-    <li><%= fa_icon 'desktop 3x', class: 'disabled' %><span>800x600</span></li>
-    <li><%= fa_icon 'laptop 3x', class: 'disabled' %></li>
-    <li><%= fa_icon 'tablet 3x', title: '800x600' %></li>
     <li><%= fa_icon 'mobile 3x' %></li>
+    <li><%= fa_icon 'tablet 3x', title: '800x600' %></li>
+    <li><%= fa_icon 'laptop 3x', class: 'disabled' %></li>
+    <li><%= fa_icon 'desktop 3x', class: 'disabled' %><span>800x600</span></li>
   </ul>
   <%= hidden_field_tag :phone, true %>
   <div class="sizes">

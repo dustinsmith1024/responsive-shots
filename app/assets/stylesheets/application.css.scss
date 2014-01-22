@@ -8,9 +8,9 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
  *= require_tree .
  *= require font-awesome
+ *= require_self
  */
 
 /* Going for a 2 color scheme with dark bg and light
@@ -31,6 +31,11 @@ body {
 	font-family: Century Gothic, sans-serif;
 	text-transform: uppercase;
 }
+
+button, input {
+	line-height: 1.5em;
+}
+
 .code {
 	overflow: scroll;
 	width: 100%;
@@ -155,7 +160,7 @@ td {
 	position: relative;
 	z-index: 70;
 	border: 3px solid #000;
-	background-color: rgba(10, 10, 10, 0.8);
+	background-color: rgba(10, 10, 10, 0.9);
 	box-shadow: 0px 3px 300px #000;
 	border-radius: 2px;
 	padding: 0 20px 20px;
@@ -189,7 +194,7 @@ td {
 }
 
 .inline-icon-list {
-	padding: 20px 0;
+	padding: 0 0 20px 0;
 }
 
 .inline-icon-list li {
