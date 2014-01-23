@@ -1,15 +1,15 @@
 # Read about fixtures at
 # http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  slug: MyString
-  display: MyString
+desktop:
+  slug: desktop
+  display: Desktop
   icon: MyString
   primary: false
-  height: 1
-  width: 1
+  height: 100
+  width: 200
 
-two:
+mobile:
   slug: MyString
   display: MyString
   icon: MyString

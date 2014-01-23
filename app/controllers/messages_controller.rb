@@ -15,9 +15,8 @@ class MessagesController < ApplicationController
   # GET /messages/new
   def new
     @message = Message.new
-    @message.screenshots.build(height: 900, width: 1200)
-    @message.screenshots.build(height: 600, width: 768)
-    @message.screenshots.build(height: 480, width: 320)
+    @message.screenshots.build(size_id: Size.first)
+    @message.screenshots.build(size_id: Size.last)
   end
 
   # GET /messages/1/edit
@@ -74,6 +73,6 @@ class MessagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params.require(:message).permit(:description, :email, :url, screenshots_attributes: [:id, :height, :width ])
+      params.require(:message).permit(:description, :email, :url, screenshots_attributes: [:id, :size_id ])
     end
 end

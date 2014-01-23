@@ -2,11 +2,9 @@
 # http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  height: 1
-  width: 1
-  file: MyString
+  size_id: 1
+  file: path/pather/
 
 two:
-  height: 1
-  width: 1
-  file: MyString
+  size_id: 2
+  file: local/path

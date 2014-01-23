@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140122033809) do
+ActiveRecord::Schema.define(version: 20140123025501) do
 
   create_table "messages", force: true do |t|
     t.text     "description"
@@ -25,12 +25,11 @@ ActiveRecord::Schema.define(version: 20140122033809) do
   end
 
   create_table "screenshots", force: true do |t|
-    t.integer  "height"
-    t.integer  "width"
     t.string   "file"
     t.integer  "message_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "size_id"
   end
 
   create_table "sizes", force: true do |t|

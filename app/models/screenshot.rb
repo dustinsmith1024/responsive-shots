@@ -3,7 +3,11 @@ require 'capybara/poltergeist'
 class Screenshot < ActiveRecord::Base
   include Capybara::DSL
   belongs_to :message
+  belongs_to :size
+  
   delegate :url, to: :message
+  delegate :height, to: :size
+  delegate :width, to: :size
 
 
   def file_name

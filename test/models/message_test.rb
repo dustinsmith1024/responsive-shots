@@ -1,7 +1,8 @@
 require "test_helper"
 
 class MessageTest < ActiveSupport::TestCase
-  
+  fixtures :sizes
+
   def test_object_methods
     message = Message.new({ url: 'http://gmail.com', email: 'example@gmail.com' })
     [:email, :url, :token, :description, :error, :delivered, :prepare, :cleanup, :send].each do |method|
@@ -44,8 +45,10 @@ class MessageTest < ActiveSupport::TestCase
 
   def test_prepare
     message = Message.create({ url: 'http://smith1024.com', email: 'dds1024+spam@gmail.com' })
-    shot1 = message.screenshots.create({height: 800, width: 1020})
-    shot2 = message.screenshots.create({height: 300, width: 1220})
+    size = sizes(:desktop)
+    size2 = sizes(:mobile)
+    shot1 = message.screenshots.create({size_id: size.id})
+    shot2 = message.screenshots.create({size_id: size2.id})
 
     message.prepare
     refute_nil shot1.file
@@ -57,7 +60,8 @@ class MessageTest < ActiveSupport::TestCase
 
   def test_deliver
     message = Message.create({ url: 'http://smith1024.com', email: 'dds1024+spam@gmail.com' })
-    shot1 = message.screenshots.create({height: 800, width: 1200})
+    size2 = sizes(:mobile)
+    shot1 = message.screenshots.create({size_id: size2.id})
 
     message.deliver
     refute_nil shot1.file
