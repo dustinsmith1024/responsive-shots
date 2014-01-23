@@ -18,19 +18,14 @@
     <%= f.label :email %>: <br />
     <%= f.text_field :email, placeholder: "you@gmail.com" %>
   </div>
+
   <label>Screen Sizes:</label>
   <ul class="inline-icon-list">
-    <li><%= fa_icon 'mobile 3x' %></li>
-    <li><%= fa_icon 'tablet 3x', title: '800x600' %></li>
-    <li><%= fa_icon 'laptop 3x', class: 'disabled' %></li>
-    <li><%= fa_icon 'desktop 3x', class: 'disabled' %><span>800x600</span></li>
+    <% Size.common.each do |size| %>
+      <li><%= fa_icon size.icon + ' 3x', title: size.display %></li>
+    <% end %>
   </ul>
-  <%= hidden_field_tag :phone, true %>
-  <div class="sizes">
-  <%= f.fields_for :screenshots do |builder| %> 
-        <%= builder.hidden_field :height %>
-        <%= builder.hidden_field :width %>
-  <% end %>
+
   </div>
   <div class="actions">
     <%= f.submit @button %>
