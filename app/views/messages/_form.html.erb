@@ -22,11 +22,18 @@
   <label>Screen Sizes:</label>
   <ul class="inline-icon-list">
     <% Size.common.each do |size| %>
-      <li><%= fa_icon size.icon + ' 3x', title: size.display %></li>
+      <li>
+        <% if @message.screenshots.collect(&:size_id).include? size.id %>
+          <%= check_box_tag "sizes[#{size.id}]", true, true %>
+          <%= fa_icon size.icon + ' 3x' , title: size.display, id: size.id %>
+        <% else %>
+          <%= check_box_tag "sizes[#{size.id}]" %>
+          <%= fa_icon size.icon + ' 3x', class: 'disabled', title: size.display, id: size.id %>
+        <% end %>
+      </li>
     <% end %>
   </ul>
 
-  </div>
   <div class="actions">
     <%= f.submit @button %>
   </div>

@@ -18,4 +18,7 @@
 $(document).on('click', '.fa', function(e){
   e.preventDefault();
   $(this).toggleClass('disabled');
+  var id = $(this).attr('id');
+  var checkbox = $("#sizes_" + id)
+  checkbox.prop("checked", !checkbox.prop("checked"));
 })

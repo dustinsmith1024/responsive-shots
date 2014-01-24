@@ -15,8 +15,8 @@ class MessagesController < ApplicationController
   # GET /messages/new
   def new
     @message = Message.new
-    @message.screenshots.build(size_id: Size.first)
-    @message.screenshots.build(size_id: Size.last)
+    @message.screenshots.build(size_id: Size.first.id)
+    @message.screenshots.build(size_id: Size.last.id)
   end
 
   # GET /messages/1/edit
@@ -42,7 +42,17 @@ class MessagesController < ApplicationController
   # PATCH/PUT /messages/1
   # PATCH/PUT /messages/1.json
   def update
-    puts params[:phone]
+    # TODO: Wrap this in a transaction?
+    sizes = params[:sizes]
+    # Remove all previous screenshots so we have a fresh slate
+    @message.screenshots.destroy_all
+    if sizes
+      sizes.keys.each do |s|
+        # S IS A '1'=>'1' so its not initing correctly
+        @message.screenshots.create(size_id: s)
+      end
+    end
+
     respond_to do |format|
       if @message.update_attributes(message_params)
         format.html { redirect_to @message, notice: 'Message was successfully updated.' }
@@ -73,6 +83,6 @@ class MessagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params.require(:message).permit(:description, :email, :url, screenshots_attributes: [:id, :size_id ])
+      params.require(:message).permit(:description, :email, :url)
     end
 end

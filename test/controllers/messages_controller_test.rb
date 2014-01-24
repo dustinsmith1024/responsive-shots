@@ -19,7 +19,9 @@ class MessagesControllerTest < ActionController::TestCase
 
   def test_create
     assert_difference('Message.count') do
-      post :create, message: { description: 'sup', url: 'http://email.com', email: 'h@gmail.com' } # investigate: minitest doesnt like a blank message? 
+      post :create, message: { # investigate: minitest doesnt like a blank message? 
+        description: 'sup', url: 'http://email.com', email: 'h@gmail.com',
+        screenshots_attributes: [{size_id: '1'}] }
     end
 
     assert_redirected_to message_path(assigns(:message))
@@ -36,7 +38,9 @@ class MessagesControllerTest < ActionController::TestCase
   end
 
   def test_update
-    put :update, id: @message, message: { url: 'http://one.com', email: 'h@gmail.com' }
+    put :update, id: @message, message: { url: 'http://one.com', 
+      email: 'h@gmail.com',
+      screenshots_attributes: [{size_id: '1', id: '1'}] }
     assert_redirected_to message_path(assigns(:message))
   end
 

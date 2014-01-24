@@ -195,6 +195,9 @@ td {
 
 .inline-icon-list {
 	padding: 0 0 20px 0;
+	input[type=checkbox] {
+		display: none;
+	}
 }
 
 .inline-icon-list li {
