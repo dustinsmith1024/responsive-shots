@@ -1,7 +1,8 @@
 require "test_helper"
 
 class MessagesControllerTest < ActionController::TestCase
-
+  fixtures :sizes
+  
   before do
     @message = messages(:one)
   end
@@ -12,20 +13,36 @@ class MessagesControllerTest < ActionController::TestCase
     assert_not_nil assigns(:messages)
   end
 
+  # Requires a fixture setup because it builds a messsage.screenshot
   def test_new
     get :new
     assert_response :success
   end
 
   def test_create
-    size = Size.create(height: 100, width: 100)
     assert_difference(['Message.count', 'Screenshot.count']) do
-      post :create, {message: { # investigate: minitest doesnt like a blank message? 
-        description: 'sup', url: 'http://email.com', email: 'h@gmail.com',
-        }, sizes: {'1'=> '1'}}
+      post :create, {
+        message: { description: 'sup', url: 'http://email.com', email: 'h@gmail.com'},
+        sizes: { sizes(:desktop).id => true}}
     end
 
     assert_redirected_to message_path(assigns(:message))
+  end
+
+  def test_create_fail
+    assert_no_difference(['Message.count', 'Screenshot.count']) do
+      post :create, {
+        message: { description: 'sup'},
+        sizes: { '2222' => true}}
+    end
+  end
+
+
+  def test_no_screenshots_added
+    assert_no_difference('Screenshot.count') do
+      post :create, {
+        message: { description: 'sup', url: 'http://email.com', email: 'h@gmail.com'}}
+    end
   end
 
   def test_show

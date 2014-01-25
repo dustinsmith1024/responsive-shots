@@ -52,8 +52,7 @@ class MessagesController < ApplicationController
     @message.screenshots.destroy_all
     # Sizes come as a hash {'1'=>true, '2'=>true}
     sizes && sizes.keys.each do |size|
-        @message.screenshots.new(size_id: size) if Size.exists?(size)
-      end
+      @message.screenshots.new(size_id: size) if Size.exists?(size)
     end
 
     respond_to do |format|
@@ -69,7 +68,6 @@ class MessagesController < ApplicationController
 
   # DELETE /messages/1
   # DELETE /messages/1.json
-  # TODO: Remove or move to admin?
   def destroy
     @message.destroy
     respond_to do |format|

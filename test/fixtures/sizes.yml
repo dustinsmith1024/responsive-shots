@@ -5,7 +5,7 @@ desktop:
   slug: desktop
   display: Desktop
   icon: MyString
-  primary: false
+  primary: true
   height: 100
   width: 200
 
@@ -13,6 +13,6 @@ mobile:
   slug: MyString
   display: MyString
   icon: MyString
-  primary: false
+  primary: true
   height: 1
   width: 1
