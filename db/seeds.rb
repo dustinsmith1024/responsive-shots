@@ -16,5 +16,7 @@ Size.create([
    {icon: 'tablet', height: 1200, width: 1000, slug: 'tablet', primary: true,
    display: 'Tablet (1000x1200)'},
    {icon: 'mobile', height: 800, width: 400, slug: 'mobile', primary: true,
-   display: 'Mobile (400x800)'}
+   display: 'Mobile (400x800)'},
+   {icon: 'tablet rotate-90', height: 1000, width: 1200, slug: 'tablet-horizontal', primary: false,
+   display: 'Mobile (1200x1000)'},
   ])

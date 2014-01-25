@@ -4,6 +4,8 @@ class Screenshot < ActiveRecord::Base
   include Capybara::DSL
   belongs_to :message
   belongs_to :size
+
+  validates :size_id, presence: true
   
   delegate :url, to: :message
   delegate :height, to: :size

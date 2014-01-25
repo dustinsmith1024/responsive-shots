@@ -15,8 +15,8 @@ class MessagesController < ApplicationController
   # GET /messages/new
   def new
     @message = Message.new
-    @message.screenshots.build(size_id: Size.first.id)
-    @message.screenshots.build(size_id: Size.last.id)
+    # TODO: Tweak this to pick 'desktop' specifically
+    @message.screenshots.build(size_id: Size.common.first.id)
   end
 
   # GET /messages/1/edit
@@ -27,6 +27,11 @@ class MessagesController < ApplicationController
   # POST /messages.json
   def create
     @message = Message.new(message_params)
+    sizes = params[:sizes]
+    # Sizes come as a hash {'1'=>true, '2'=>true}
+    sizes && sizes.keys.each do |size|
+      @message.screenshots.new(size_id: size) if Size.exists?(size)
+    end
 
     respond_to do |format|
       if @message.save
@@ -42,19 +47,17 @@ class MessagesController < ApplicationController
   # PATCH/PUT /messages/1
   # PATCH/PUT /messages/1.json
   def update
-    # TODO: Wrap this in a transaction?
     sizes = params[:sizes]
     # Remove all previous screenshots so we have a fresh slate
     @message.screenshots.destroy_all
-    if sizes
-      sizes.keys.each do |s|
-        # S IS A '1'=>'1' so its not initing correctly
-        @message.screenshots.create(size_id: s)
+    # Sizes come as a hash {'1'=>true, '2'=>true}
+    sizes && sizes.keys.each do |size|
+        @message.screenshots.new(size_id: size) if Size.exists?(size)
       end
     end
 
     respond_to do |format|
-      if @message.update_attributes(message_params)
+      if @message.update(message_params)
         format.html { redirect_to @message, notice: 'Message was successfully updated.' }
         format.json { head :no_content }
       else

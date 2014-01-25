@@ -18,10 +18,11 @@ class MessagesControllerTest < ActionController::TestCase
   end
 
   def test_create
-    assert_difference('Message.count') do
-      post :create, message: { # investigate: minitest doesnt like a blank message? 
+    size = Size.create(height: 100, width: 100)
+    assert_difference(['Message.count', 'Screenshot.count']) do
+      post :create, {message: { # investigate: minitest doesnt like a blank message? 
         description: 'sup', url: 'http://email.com', email: 'h@gmail.com',
-        screenshots_attributes: [{size_id: '1'}] }
+        }, sizes: {'1'=> '1'}}
     end
 
     assert_redirected_to message_path(assigns(:message))
