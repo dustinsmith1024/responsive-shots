@@ -6,7 +6,8 @@ class CreateMessages < ActiveRecord::Migration
       t.string :token
       t.string :email
       t.string :url
-      t.boolean :delivered
+      t.boolean :queued
+      t.datetime :delivery_time
 
       t.timestamps
     end

@@ -3,13 +3,8 @@
 <table>
   <thead>
     <tr>
-      <th>Description</th>
-      <th>Error</th>
-      <th>Token</th>
-      <th>Email</th>
       <th>Url</th>
       <th>Delivered</th>
-      <th></th>
       <th></th>
       <th></th>
     </tr>
@@ -18,15 +13,10 @@
   <tbody>
     <% @messages.each do |message| %>
       <tr>
-        <td><%= message.description %></td>
-        <td><%= message.error %></td>
-        <td><%= message.token %></td>
-        <td><%= message.email %></td>
         <td><%= message.url %></td>
-        <td><%= message.delivered %></td>
+        <td><%= message.delivery_time %></td>
         <td><%= link_to 'Show', message %></td>
         <td><%= link_to 'Edit', edit_message_path(message) %></td>
-        <td><%= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

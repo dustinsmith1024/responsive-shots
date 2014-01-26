@@ -3,8 +3,13 @@ class MessagesController < ApplicationController
 
   # GET /messages
   # GET /messages.json
+  # TODO: Move off 'index' to its own route
   def index
-    @messages = Message.all
+    if params[:email]
+      @messages = Message.where(:email, params[:email]) 
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
   end
 
   # GET /messages/1
@@ -27,6 +32,7 @@ class MessagesController < ApplicationController
   # POST /messages.json
   def create
     @message = Message.new(message_params)
+    @message.queued = true
     build_screenshots
 
     respond_to do |format|

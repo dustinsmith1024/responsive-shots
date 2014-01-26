@@ -1,9 +1,6 @@
 module MessagesHelper
 
-  def icon
-    puts 'hi'
-  end
-
+  # TODO: Move to form object or presenter?
   def size_check_box(size_id, active)
     check_box_tag "sizes[#{size_id}]", true, active
   end

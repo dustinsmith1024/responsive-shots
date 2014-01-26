@@ -20,7 +20,8 @@ class Message < ActiveRecord::Base
     prepare
     ScreenshotMailer.screenshot_email(self).deliver unless self.error
     cleanup
-    self.delivered = Time.now
+    self.queued = false
+    self.delivery_time = Time.now
     self.save!
   end
 
@@ -28,7 +29,7 @@ class Message < ActiveRecord::Base
     screenshots.collect(&:size_id)
   end
 
-  def has_size?(size_id)
+  def has_screenshot_with_size?(size_id)
     size_ids.include? size_id
   end
 end

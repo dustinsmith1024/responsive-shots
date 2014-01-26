@@ -5,7 +5,7 @@ class MessageTest < ActiveSupport::TestCase
 
   def test_object_methods
     message = Message.new({ url: 'http://gmail.com', email: 'example@gmail.com' })
-    [:email, :url, :token, :description, :error, :delivered, :prepare, :cleanup, :send].each do |method|
+    [:email, :url, :token, :description, :error, :delivery_time, :queued, :prepare, :cleanup, :send].each do |method|
       assert_respond_to message, method
     end
   end

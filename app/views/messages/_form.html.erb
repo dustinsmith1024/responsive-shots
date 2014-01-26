@@ -10,6 +10,7 @@
       </ul>
     </div>
   <% end %>
+
   <div class="field">
     <%= f.label :url %>: <br />
     <%= f.text_field :url, placeholder: 'http://responsiveshots.com' %>
@@ -19,17 +20,17 @@
     <%= f.text_field :email, placeholder: "you@gmail.com" %>
   </div>
 
-  <label>Screen Sizes:</label>
+  <h3>Screen Sizes:</h3>
   <ul class="inline-icon-list">
     <% Size.common.each do |size| %>
       <li>
-          <%= size_check_box size.id, @message.has_size?(size.id) %>
-          <%= message_icon size, @message.has_size?(size.id) %>
+          <%= size_check_box size.id, @message.has_screenshot_with_size?(size.id) %>
+          <%= message_icon size, @message.has_screenshot_with_size?(size.id) %>
       </li>
     <% end %>
   </ul>
 
   <div class="actions">
-    <%= f.submit @button %>
+    <%= f.submit 'Send Screenshots' %>
   </div>
 <% end %>

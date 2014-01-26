@@ -7,7 +7,7 @@ one:
   token: MyString
   email: MyString
   url: MyString
-  delivered: false
+  queued: false
 
 two:
   description: MyText
@@ -15,4 +15,4 @@ two:
   token: MyString
   email: MyString
   url: MyString
-  delivered: false
+  queued: true

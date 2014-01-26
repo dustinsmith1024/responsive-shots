@@ -19,7 +19,8 @@ ActiveRecord::Schema.define(version: 20140123025501) do
     t.string   "token"
     t.string   "email"
     t.string   "url"
-    t.boolean  "delivered"
+    t.boolean  "queued"
+    t.datetime "delivery_time"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

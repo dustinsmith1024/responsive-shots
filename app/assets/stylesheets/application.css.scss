@@ -221,7 +221,7 @@ td {
 	color: gray;
 }
 
-.inline-icon-list li {
+form .inline-icon-list li {
 	span {
 		opacity: 0;
 	}
@@ -233,7 +233,7 @@ td {
   -moz-transition-duration: 250ms;
 }
 
-.inline-icon-list li:hover {
+form .inline-icon-list li:hover {
   -webkit-transform: scale(1.25);
 	-webkit-transition-timing-function: ease-out;
 	-webkit-transition-duration: 250ms;

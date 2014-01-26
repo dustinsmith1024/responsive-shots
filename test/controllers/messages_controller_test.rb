@@ -63,11 +63,11 @@ class MessagesControllerTest < ActionController::TestCase
   end
 
   def test_wont_update_restricted_fields
-    put :update, id: @message, message: { delivered: true, token: '123', error: true, url: 'http://one.com', email: 'h@gmail.com' }
+    put :update, id: @message, message: { delivery_time: Time.now, token: '123', error: true, url: 'http://one.com', email: 'h@gmail.com' }
     new_message = assigns(:message)
 
     assert_equal('http://one.com', new_message.url)
-    assert_equal(@message.delivered, new_message.delivered)
+    assert_equal(@message.delivery_time, new_message.delivery_time)
     assert_equal(@message.error, new_message.error)
     assert_equal(@message.token, new_message.token)
 
