@@ -1,4 +1,5 @@
 <%= form_for(@message) do |f| %>
+<%= @message.inspect %>
   <% if @message.errors.any? %>
     <div id="error_explanation">
       <p><%= pluralize(@message.errors.count, "error") %> prohibited this screenshot from being saved:</p>

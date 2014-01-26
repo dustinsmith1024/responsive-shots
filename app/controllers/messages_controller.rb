@@ -14,9 +14,7 @@ class MessagesController < ApplicationController
 
   # GET /messages/new
   def new
-    @message = Message.new
-    # TODO: Tweak this to pick 'desktop' specifically
-    @message.screenshots.build(size_id: Size.common.first.id)
+    @message = MessageForm.new()
   end
 
   # GET /messages/1/edit
@@ -26,12 +24,7 @@ class MessagesController < ApplicationController
   # POST /messages
   # POST /messages.json
   def create
-    @message = Message.new(message_params)
-    sizes = params[:sizes]
-    # Sizes come as a hash {'1'=>true, '2'=>true}
-    sizes && sizes.keys.each do |size|
-      @message.screenshots.new(size_id: size) if Size.exists?(size)
-    end
+    @message = MessageForm.new(message_params)
 
     respond_to do |format|
       if @message.save
@@ -85,5 +78,6 @@ class MessagesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
       params.require(:message).permit(:description, :email, :url)
+      params.require(:sizes)
     end
 end
