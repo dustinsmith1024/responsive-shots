@@ -23,4 +23,12 @@ class Message < ActiveRecord::Base
     self.delivered = Time.now
     self.save!
   end
+
+  def size_ids
+    screenshots.collect(&:size_id)
+  end
+
+  def has_size?(size_id)
+    size_ids.include? size_id
+  end
 end
