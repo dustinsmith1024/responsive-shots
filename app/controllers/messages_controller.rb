@@ -27,11 +27,7 @@ class MessagesController < ApplicationController
   # POST /messages.json
   def create
     @message = Message.new(message_params)
-    sizes = params[:sizes]
-    # Sizes come as a hash {'1'=>true, '2'=>true}
-    sizes && sizes.keys.each do |size|
-      @message.screenshots.new(size_id: size) if Size.exists?(size)
-    end
+    build_screenshots
 
     respond_to do |format|
       if @message.save
@@ -47,13 +43,9 @@ class MessagesController < ApplicationController
   # PATCH/PUT /messages/1
   # PATCH/PUT /messages/1.json
   def update
-    sizes = params[:sizes]
     # Remove all previous screenshots so we have a fresh slate
     @message.screenshots.destroy_all
-    # Sizes come as a hash {'1'=>true, '2'=>true}
-    sizes && sizes.keys.each do |size|
-      @message.screenshots.new(size_id: size) if Size.exists?(size)
-    end
+    build_screenshots
 
     respond_to do |format|
       if @message.update(message_params)
@@ -82,8 +74,19 @@ class MessagesController < ApplicationController
       @message = Message.find(params[:id])
     end
 
+    def sizes
+      # Sizes come as a hash {'1'=>true, '2'=>true}, so we need to parse to [1,2]
+      params[:sizes] && params[:sizes].keys || []
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
       params.require(:message).permit(:description, :email, :url)
+    end
+
+    # TODO: Extract to form object?
+    def build_screenshots
+      sizes.each do |size|
+        @message.screenshots.new(size_id: size) if Size.exists?(size)
+      end
     end
 end
