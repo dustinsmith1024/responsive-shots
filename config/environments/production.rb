@@ -29,7 +29,9 @@ ResponsiveShots::Application.configure do
     :password             => 'rmxmnrckawncodlz',
     :authentication       => 'plain',
     :enable_starttls_auto => true  }
-    
+
+  config.action_mailer.raise_delivery_errors = true
+
   # Disable Rails's static asset server (Apache or nginx will already do this).
   config.serve_static_assets = false
 
