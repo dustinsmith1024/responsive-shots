@@ -69,8 +69,8 @@ class MessagesController < ApplicationController
 
   def deliver
     respond_to do |format|
-      if MessageDeliverer.deliver(params[:message_id])
-        format.html { redirect_to @message, notice: 'Message was queued for delivery.' }
+      if Resque.enqueue(MessageDeliverer, params[:message_id])
+        format.html { redirect_to message_path(params[:message_id]), notice: 'Message was queued for delivery.' }
         format.json { head :no_content }
       else
         format.html { render action: 'show' }

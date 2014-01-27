@@ -33,6 +33,7 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'pry-rails', :group => :development
 
+gem 'resque', '~> 1.23'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
