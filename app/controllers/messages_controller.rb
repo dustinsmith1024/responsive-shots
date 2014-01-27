@@ -54,10 +54,12 @@ class MessagesController < ApplicationController
   def update
     # Remove all previous screenshots so we have a fresh slate
     @message.screenshots.destroy_all
+    @message.queued = true
     build_screenshots
 
     respond_to do |format|
       if @message.update(message_params)
+        Resque.enqueue(MessageDeliverer, @message.id)
         format.html { redirect_to @message, notice: 'Message was successfully updated.' }
         format.json { head :no_content }
       else

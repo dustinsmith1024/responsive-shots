@@ -3,7 +3,9 @@ ResponsiveShots::Application.routes.draw do
     get :deliver
   end
 
-  get "static/home"
+  get 'info', to: "static#home"
+  # TODO: Fixup the API
+  #get 'api', to: "static#api"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
