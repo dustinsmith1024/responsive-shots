@@ -8,9 +8,16 @@ class MessagesControllerTest < ActionController::TestCase
   end
 
   def test_index
-    get :index
+    # Must send an email to get a list of messages
+    Message.create({email: 'test@gmail.com', url: 'http://hi.com'})
+    get :index, email: 'test@gmail.com'
     assert_response :success
-    assert_not_nil assigns(:messages)
+    refute_empty assigns(:messages)
+  end
+
+  def test_index_failure
+    get :index
+    assert_response :missing
   end
 
   # Requires a fixture setup because it builds a messsage.screenshot
@@ -72,13 +79,5 @@ class MessagesControllerTest < ActionController::TestCase
     assert_equal(@message.token, new_message.token)
 
     assert_redirected_to message_path(assigns(:message))
-  end
-
-  def test_destroy
-    assert_difference('Message.count', -1) do
-      delete :destroy, id: @message
-    end
-
-    assert_redirected_to messages_path
   end
 end

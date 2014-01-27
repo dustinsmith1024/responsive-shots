@@ -6,9 +6,10 @@ class MessagesController < ApplicationController
   # TODO: Move off 'index' to its own route
   def index
     if params[:email]
-      @messages = Message.where(:email, params[:email]) 
+      @messages = Message.where(email: params[:email]) 
     else
-      raise ActionController::RoutingError.new('Not Found')
+      # TODO: Style it?
+      render :text => 'Not Found', :status => '404'
     end
   end
 
@@ -75,16 +76,6 @@ class MessagesController < ApplicationController
         format.html { render action: 'show' }
         format.json { render json: @message.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /messages/1
-  # DELETE /messages/1.json
-  def destroy
-    @message.destroy
-    respond_to do |format|
-      format.html { redirect_to messages_url }
-      format.json { head :no_content }
     end
   end
 
