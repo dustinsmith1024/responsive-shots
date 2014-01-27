@@ -20,8 +20,10 @@ class MessagesController < ApplicationController
   # GET /messages/new
   def new
     @message = Message.new
-    # TODO: Tweak this to pick 'desktop' specifically
-    @message.screenshots.build(size_id: Size.common.first.id)
+
+    Size.common.each do |size|
+      @message.screenshots.build(size_id: size.id)
+    end
   end
 
   # GET /messages/1/edit
@@ -64,6 +66,18 @@ class MessagesController < ApplicationController
     end
   end
 
+  def deliver
+    respond_to do |format|
+      if MessageDeliverer.deliver(params[:message_id])
+        format.html { redirect_to @message, notice: 'Message was queued for delivery.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'show' }
+        format.json { render json: @message.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # DELETE /messages/1
   # DELETE /messages/1.json
   def destroy
@@ -77,7 +91,7 @@ class MessagesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_message
-      @message = Message.find(params[:id])
+      @message = Message.find(params[:id] || params[:message_id])
     end
 
     def sizes

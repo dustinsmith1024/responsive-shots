@@ -1,5 +1,7 @@
 ResponsiveShots::Application.routes.draw do
-  resources :messages, only: [:show, :new, :edit, :update, :create, :index]
+  resources :messages, only: [:show, :new, :edit, :update, :create, :index] do
+    get :deliver
+  end
 
   get "static/home"
   # The priority is based upon order of creation: first created -> highest priority.

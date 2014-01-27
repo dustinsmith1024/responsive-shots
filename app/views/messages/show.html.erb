@@ -8,7 +8,7 @@
 <p>
   <b>Delivered:</b>
   <% if @message.queued %>
-    Queued up for delivery
+    Queued up
   <% else %>
     <%= @message.delivery_time %>
   <% end %>
@@ -29,6 +29,6 @@
   <% end %>
 </ul>
 
-<%#= link_to 'Resend', run_screenshot_path(@screenshot, token: @screenshot.token, email: @screenshot.email) %> &#8226; 
+<%= link_to 'Resend', message_deliver_path(@message) %> &#8226; 
 <%= link_to 'Edit', edit_message_path(@message) %> &#8226; 
 <%= link_to 'New', new_message_path %>
