@@ -11,7 +11,6 @@ class Screenshot < ActiveRecord::Base
   delegate :height, to: :size
   delegate :width, to: :size
 
-
   def file_name
     "message_#{message.id}_screenshot_#{id}.png"
   end
@@ -25,6 +24,7 @@ class Screenshot < ActiveRecord::Base
       page.driver.resize_window(width, height)
       page.driver.render(file, full: true)
     rescue => e
+      # TODO: Log appropriately and send error email
       puts e
       message.error = true
     end

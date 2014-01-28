@@ -27,5 +27,5 @@ production:
   database: responsive_prod
   pool: 5
   timeout: 5000
-  username: dustinsmith
+  username: root
   password: 

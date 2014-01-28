@@ -24,9 +24,9 @@ ResponsiveShots::Application.configure do
   config.action_mailer.smtp_settings = {
     :address              => "smtp.gmail.com",
     :port                 => 587,
-    :domain               => 'smith1024.com',
-    :user_name            => 'dds1024@gmail.com',
-    :password             => 'rmxmnrckawncodlz',
+    :domain               => 'responsiveshots.com',
+    :user_name            => '<your_email>',
+    :password             => '<your key>',
     :authentication       => 'plain',
     :enable_starttls_auto => true  }
 
