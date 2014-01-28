@@ -4,6 +4,8 @@ class Message < ActiveRecord::Base
 	validates :url, presence: true, format: {:with => URI::regexp(%w(http https))}
 	validates :email, presence: true, format: {:with => /@/}
 
+  before_create :save_token
+
   def prepare
     screenshots.each do |screenshot|
       screenshot.take
@@ -32,4 +34,11 @@ class Message < ActiveRecord::Base
   def has_screenshot_with_size?(size_id)
     size_ids.include? size_id
   end
+
+  private
+
+    # TODO: Use this as the ID in urls for a little more privacy
+    def save_token
+      self.token = SecureRandom.uuid unless self.token
+    end
 end
