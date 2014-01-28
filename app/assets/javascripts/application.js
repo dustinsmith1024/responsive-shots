@@ -15,7 +15,7 @@
 //= require turbolinks
 //= require_tree .
 
-$(document).on('click', 'form .fa', function(e){
+$(document).on('click touchend', 'form .fa', function(e){
   e.preventDefault();
   $(this).toggleClass('disabled');
   var id = $(this).attr('id');
