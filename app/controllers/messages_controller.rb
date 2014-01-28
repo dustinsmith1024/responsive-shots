@@ -54,6 +54,7 @@ class MessagesController < ApplicationController
   def update
     # Remove all previous screenshots so we have a fresh slate
     @message.screenshots.destroy_all
+    @message.error = false
     @message.queued = true
     build_screenshots
 
