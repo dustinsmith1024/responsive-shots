@@ -72,6 +72,7 @@ class MessagesController < ApplicationController
   end
 
   def deliver
+    # TODO: Handle errors and resetting screenshots if necessary
     respond_to do |format|
       if Resque.enqueue(MessageDeliverer, params[:message_id])
         format.html { redirect_to message_path(params[:message_id]), notice: 'Message was queued for delivery.' }
