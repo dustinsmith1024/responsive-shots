@@ -2,7 +2,7 @@
 
 A simple application to emails screenshots of a website at different resolutions.
 
-http://responsiveshots.com
+Used to run at http://responsiveshots.com. I have since removed it and just run it locally when needed. Feel free to run your own instance at any domain though.
 
 Currently we only support 4 sizes:
 * 1920x1080
